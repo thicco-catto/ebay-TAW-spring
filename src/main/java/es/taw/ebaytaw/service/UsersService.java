@@ -23,17 +23,28 @@ import java.util.stream.Collectors;
 @Service
 public class UsersService {
 
+   // public void setUsersRepository(){}
+
+
     //Cristobal
     public List<UsersDTO> listaEntityADTO(List<Users> lista) {
         return lista.stream().map(u -> u.toDTO()).collect(Collectors.toList());
     }
 
-   UsersRepository uf;
+    public UsersRepository getUf() {
+        return uf;
+    }
+
+    public void setUf(UsersRepository uf) {
+        this.uf = uf;
+    }
+
+    UsersRepository uf;
     UsuarioslistaRepository ulf;
 
     // Miguel y Cristobal
     public UsersDTO comprobarCredenciales(String email, String pass) {
-        Users usuario = this.uf.comprobarUsuario(email, pass);
+        Users usuario = this.uf.findByEmailAndPassword(email, pass);
         if (usuario == null){
             return null;
         }

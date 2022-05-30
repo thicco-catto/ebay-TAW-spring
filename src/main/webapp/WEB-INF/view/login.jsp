@@ -77,7 +77,7 @@
 <div class="content">
     <h1>Bienvenidx a ebay</h1>
     <%= msjError%>
-    <form action="./LoginServlet" method="POST">
+    <form action="/autentica" method="POST">
         <table border="0">
             <tbody>
             <tr>

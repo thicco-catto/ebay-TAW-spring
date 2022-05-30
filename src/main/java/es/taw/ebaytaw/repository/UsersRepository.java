@@ -16,6 +16,9 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
     public Users comprobarUsuario (String email, String pass);
 
 
+    Users findByEmailAndPassword(String email, String pass);
+
+
 
     //Antonio
     //Query("SELECT u FROM Users u WHERE u.name like '%  :nombreUsuario %' ")
