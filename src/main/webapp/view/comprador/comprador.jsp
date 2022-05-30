@@ -1,10 +1,10 @@
-<%-- 
+<%--
     Document   : comprador
     Created on : 07-may-2022, 20:32:25
     Author     : 34637
 --%>
 
-<%@page import="DTO.UserDTO"%>
+<%@ page import="es.taw.ebaytaw.DTO.UserDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

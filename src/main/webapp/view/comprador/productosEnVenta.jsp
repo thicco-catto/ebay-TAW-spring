@@ -1,37 +1,36 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
-    Document   : productosComprados
-    Created on : 07-may-2022, 20:23:27
+    Document   : productosEnVenta
+    Created on : 07-may-2022, 20:41:10
     Author     : 34637
 --%>
 
-<%@page import="DTO.UserDTO"%>
-<%@page import="DTO.CategoriesDTO"%>
-<%@page import="DTO.ProductsDTO"%>
+<%@page import="java.math.BigDecimal"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.taw.ebaytaw.DTO.ProductsDTO" %>
+<%@ page import="es.taw.ebaytaw.DTO.CategoriesDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%
-        UserDTO comprador = (UserDTO) session.getAttribute("usuario");
         List<ProductsDTO> listaProductos = (List) request.getAttribute("listaProductos");
         List<CategoriesDTO> listaCategorias = (List) request.getAttribute("listaCategorias");
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Productos pujados</title>
+        <title>Productos en venta</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/Comprador/comprador.jsp" />
         
         <div class="content">
-            <h1>Productos pujados</h1>
+            <h1>Productos en venta</h1>
             <h4>Introduzca cualquier dato relativo al producto, seleccione por categorias o por productos seguidos:</h4>
             <table border="0">
-                <tbody> 
-                    <form:form method="GET" action="ProductosPujadosCompradorServlet">
+                <tbody>
+                    <form:form method="GET" action="ProductosEnVentaCompradorServlet">
                         <tr>
-                       
+
                             <td>Producto:</td>
                             <td><form:input type="text" path="filtroTituloDescripcion" value="" /></td>
                             <td><form:button class="botonazul" type="submit" value="Buscar" /></td>
@@ -101,64 +100,49 @@
                         <%
                             }
                         %> 
-                             € </td>
+                             €                              
+                        </td>
                         <td align="center">
                         <%
                             if (productoDTO.getIsSold()) {
-                                if (productoDTO.lastBidPrice().getUserID().getUserID().equals(comprador.getUserID())) {
                         %>
-                            <img src="https://cdn-icons-png.flaticon.com/512/1701/1701940.png" width="40"> <br/>
-                            <i>Puja ganada</i>
-                        <%             
-                                } else {
-                        %>
-                            <img src="https://cdn-icons-png.flaticon.com/512/1701/1701975.png" width="40"> <br/>
-                            <i>Puja perdida</i>
-                        <%            
-                                }
+                            <img src="https://cdn-icons-png.flaticon.com/512/4051/4051030.png" width="40"> <br/>
+                            <i>Adjudicado</i>
+                        <%
                             } else {
                         %>
-                            <img src="https://cdn-icons-png.flaticon.com/512/1701/1701971.png" width="40"> <br/>
-                            <i>Subasta abierta</i>
+                            <img src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/53662/hourglass-done-emoji-clipart-md.png" width="40"> <br/>
+                            <i>En subasta</i>
                         <%
                             }
-                        %>    
+                        %>
                         </td>
                         <%
                             if (productoDTO.getIsSold()) {
-                                if (productoDTO.lastBidPrice().getUserID().getUserID().equals(comprador.getUserID())) {
                         %>
                         <td colspan="2">
-                            <i>Producto comprado</i>
+                            <i>Producto subastado</i>
                         </td>
-                        <%             
-                                } else {
-                        %>
-                        <td colspan="2">
-                            <i>Producto no adquirido</i>
-                        </td>
-                        <%            
-                                }
+                        <%    
                             } else {
                         %>
                         <td>
-                            <form:form method="GET" action="SubirPujaCompradorServlet">
-                                <form:hidden path="productoId" value="<%= productoDTO.getProductID() %>" />
-                                <form:input type="number" path="precioPuja" value="" size="9"  step="0.01" /> <br/>
-                                <form:button class="botonverde" type="submit" value="Subir puja" />
-                            </form:form>
+                            <form method="GET" action="SubirPujaCompradorServlet">
+                                <input type="hidden" name="productoId" value="<%= productoDTO.getProductID() %>" />
+                                <input type="number" name="precioPuja" value="" size="9" step="0.01" /> <br/>
+                                <input class="botonverde" type="submit" value="Subir puja" />
+                            </form>
                         </td> 
                         <td>
-                            <form:form action="RetirarPujaCompradorServlet">
-                                <form:hidden path="productoId" value="<%= productoDTO.getProductID() %>" />
+                            <form method="GET" action="RetirarPujaCompradorServlet">
+                                <input type="hidden" name="productoId" value="<%= productoDTO.getProductID() %>" />
                                 <br/>
-                                <form:button class="botonrojo" type="submit" value="Retirar puja" />
-                            </form:form>
-                        </td> 
-                        <%
+                                <input class="botonrojo" type="submit" value="Retirar puja" />
+                            </form>    
+                        </td>
+                        <%       
                             }
                         %>
-                        
                     </tr>
                     <%
                             }
