@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package es.taw.ebaytaw.entity;
 
-import DTO.ListausuarioDTO;
+import es.taw.ebaytaw.DTO.ListausuarioDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -42,9 +42,7 @@ public class Listausuarios implements Serializable {
     @Column(name = "listID")
     private Integer listID;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
-    @Column(name = "username", nullable = false, size = 128)
+    @Column(name = "username", nullable = false, length = 128)
     private String username;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "listID")
     private List<Usuarioslista> usuarioslistaList;
@@ -112,7 +110,7 @@ public class Listausuarios implements Serializable {
     }
     
     
-        public ListausuarioDTO toDTO(){
+    public ListausuarioDTO toDTO(){
         ListausuarioDTO DTO = new ListausuarioDTO();
         DTO.setListID(this.listID);
         DTO.setUsername(this.username);

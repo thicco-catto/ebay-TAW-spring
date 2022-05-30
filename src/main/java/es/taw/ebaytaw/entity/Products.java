@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package es.taw.ebaytaw.entity;
 
-import DTO.ProductsDTO;
+import es.taw.ebaytaw.DTO.ProductsDTO;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,8 +26,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 

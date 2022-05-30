@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package es.taw.ebaytaw.entity;
 
-import DTO.UserDTO;
+import es.taw.ebaytaw.DTO.UserDTO;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,8 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -61,45 +60,31 @@ public class Users implements Serializable {
     @Column(name = "userID")
     private Integer userID;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 32)
-    @Column(name = "rol")
+    @Column(name = "rol", nullable = false, length = 32)
     private String rol;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, length = 128)
     private String username;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 128)
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 128)
     private String email;
-    @Size(max = 128)
-    @Column(name = "name")
+    @Column(name = "name", nullable = true, length = 128) // insertable = false, updatable = false)
     private String name;
-    @Size(max = 128)
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = true, length = 128)
     private String surname;
-    @Size(max = 32)
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = true, length = 32)
     private String gender;
-    @Size(max = 128)
-    @Column(name = "street")
+    @Column(name = "street", nullable = true, length = 128)
     private String street;
     @Column(name = "number")
     private Integer number;
-    @Size(max = 128)
-    @Column(name = "city")
+    @Column(name = "city", nullable = true, length = 128)
     private String city;
-    @Size(max = 128)
-    @Column(name = "region")
+    @Column(name = "region", nullable = true, length = 128)
     private String region;
     @Column(name = "postalCode")
     private Integer postalCode;
@@ -107,8 +92,8 @@ public class Users implements Serializable {
     private List<Categoriesuser> categoriesuserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
     private List<Bids> bidsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
-    private List<Studies> studiesList;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
+    //private List<Studies> studiesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
     private List<Products> productsList;
 
@@ -249,14 +234,10 @@ public class Users implements Serializable {
         this.bidsList = bidsList;
     }
 
-    @XmlTransient
-    public List<Studies> getStudiesList() {
-        return studiesList;
-    }
+    //@XmlTransient
+    //public List<Studies> getStudiesList() {       return studiesList;    }
 
-    public void setStudiesList(List<Studies> studiesList) {
-        this.studiesList = studiesList;
-    }
+    //public void setStudiesList(List<Studies> studiesList) {        this.studiesList = studiesList;    }
 
     @XmlTransient
     public List<Products> getProductsList() {

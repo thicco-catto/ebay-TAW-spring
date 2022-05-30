@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package es.taw.ebaytaw.entity;
 
-import DTO.CategoriesDTO;
+import es.taw.ebaytaw.DTO.CategoriesDTO;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,8 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 

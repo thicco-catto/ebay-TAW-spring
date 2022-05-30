@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package es.taw.ebaytaw.entity;
 
-import DTO.BidsDTO;
+import es.taw.ebaytaw.DTO.BidsDTO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -49,8 +48,7 @@ public class Bids implements Serializable {
     @ManyToOne(optional = false)
     private Users userID;
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     public BigDecimal getPrice() {
