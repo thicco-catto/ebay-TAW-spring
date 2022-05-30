@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package es.taw.ebaytaw.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -40,7 +40,7 @@ public class Mensaje implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @Lob
-    @Column(name = "texto", nullable = false, size = 16777215)
+    @Column(name = "texto", nullable = false, length = 16777215)
     private String texto;
     @JoinColumn(name = "userID", referencedColumnName = "userID")
     @ManyToOne(optional = false)
