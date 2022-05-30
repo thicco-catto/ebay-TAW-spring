@@ -5,7 +5,7 @@
  */
 package es.taw.ebaytaw.entity;
 
-import es.taw.ebaytaw.DTO.UserDTO;
+import es.taw.ebaytaw.DTO.UsersDTO;
 
 import java.io.Serializable;
 import java.util.List;
@@ -274,8 +274,8 @@ public class Users implements Serializable {
     }
     
     // MIGUEL
-    public UserDTO toDTO(){
-        UserDTO dto = new UserDTO();
+    public UsersDTO toDTO(){
+        UsersDTO dto = new UsersDTO();
         dto.setUserID(userID);
         dto.setRol(rol);
         dto.setUsername(username);

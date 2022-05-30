@@ -13,16 +13,16 @@ import es.taw.ebaytaw.entity.Users;
  *
  * @author power
  */
-public class UsuarioListaDTO {
+public class UsuariosListaDTO {
     
         private Integer id;
         private Listausuarios listID;
         private Users userID;
         
-    public UsuarioListaDTO() {
+    public UsuariosListaDTO() {
     }
 
-    public UsuarioListaDTO(Integer id) {
+    public UsuariosListaDTO(Integer id) {
         this.id = id;
     }
 

@@ -10,18 +10,18 @@ package es.taw.ebaytaw.DTO;
  *
  * @author power
  */
-public class ListausuarioDTO {
+public class ListausuariosDTO {
     private int listID;
     private String username;
     
-    public ListausuarioDTO() {
+    public ListausuariosDTO() {
     }
 
-    public ListausuarioDTO(Integer listID) {
+    public ListausuariosDTO(Integer listID) {
         this.listID = listID;
     }
 
-    public ListausuarioDTO(Integer listID, String username) {
+    public ListausuariosDTO(Integer listID, String username) {
         this.listID = listID;
         this.username = username;
     }
@@ -42,8 +42,8 @@ public class ListausuarioDTO {
         this.username = username;
     }
     
-    public ListausuarioDTO toDTO(){
-        ListausuarioDTO dto = new ListausuarioDTO();
+    public ListausuariosDTO toDTO(){
+        ListausuariosDTO dto = new ListausuariosDTO();
         dto.setListID(listID);
         dto.setUsername(username);
         

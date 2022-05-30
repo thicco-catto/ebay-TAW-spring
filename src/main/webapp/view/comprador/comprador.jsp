@@ -4,12 +4,12 @@
     Author     : 34637
 --%>
 
-<%@ page import="es.taw.ebaytaw.DTO.UserDTO" %>
+<%@ page import="es.taw.ebaytaw.DTO.UsersDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%
-        UserDTO comprador = (UserDTO) session.getAttribute("usuario");
+        UsersDTO comprador = (UsersDTO) session.getAttribute("usuario");
         
         if (comprador == null) {
             response.sendRedirect(request.getContextPath());

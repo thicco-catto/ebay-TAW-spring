@@ -5,7 +5,7 @@
  */
 package es.taw.ebaytaw.entity;
 
-import es.taw.ebaytaw.DTO.ListausuarioDTO;
+import es.taw.ebaytaw.DTO.ListausuariosDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -110,8 +110,8 @@ public class Listausuarios implements Serializable {
     }
     
     
-    public ListausuarioDTO toDTO(){
-        ListausuarioDTO DTO = new ListausuarioDTO();
+    public ListausuariosDTO toDTO(){
+        ListausuariosDTO DTO = new ListausuariosDTO();
         DTO.setListID(this.listID);
         DTO.setUsername(this.username);
         

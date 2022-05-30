@@ -9,7 +9,7 @@ package es.taw.ebaytaw.DTO;
  *
  * @author mjura
  */
-public class UserDTO {
+public class UsersDTO {
     private Integer userID;
     private String rol;
     private String username;
@@ -24,7 +24,7 @@ public class UserDTO {
     private String region;
     private Integer postalCode;
    
-    public UserDTO() {
+    public UsersDTO() {
     }
 
     public Integer getUserID() {

@@ -6,14 +6,14 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@ page import="es.taw.ebaytaw.DTO.UserDTO" %>
+<%@ page import="es.taw.ebaytaw.DTO.UsersDTO" %>
 <%@ page import="es.taw.ebaytaw.DTO.ProductsDTO" %>
 <%@ page import="es.taw.ebaytaw.DTO.CategoriesDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%
-        UserDTO comprador = (UserDTO) session.getAttribute("usuario");
+        UsersDTO comprador = (UsersDTO) session.getAttribute("usuario");
         List<ProductsDTO> listaProductos = (List) request.getAttribute("listaProductos");
         List<CategoriesDTO> listaCategorias = (List) request.getAttribute("listaCategorias");
     %>
