@@ -111,20 +111,20 @@ public class UsersService {
             List<Users> users = this.uf.findAll();
             return this.listaEntityADTO(users);
         } else {
-            List<Users> users = this.uf.getUsuarios(rol, username, email, name, surname, gender, street, number, city, region, postalCode);
+            List<Users> users = this.uf.getUsers(rol, username, email, name, surname, gender, street, number, city, region, postalCode);
             return this.listaEntityADTO(users);
         }
     }
 
     //Cristobal
     public void borrarUsuario(Integer userId) {
-        Users user = this.uf.find(userId);
-        this.uf.remove(user);
+        Users user = this.uf.findById(userId).orElse(null); //poner siempre el orElse
+        this.uf.delete(user);
     }
 
     //Cristobal
     public UsersDTO getUsuario(Integer userId) {
-        Users user = this.uf.find(userId);
+        Users user = this.uf.findById(userId).orElse(null);
         return user.toDTO();
     }
 
@@ -132,7 +132,7 @@ public class UsersService {
     public void editarUser(Integer userId, String rol, String username, String email, String name,
                            String surname, String gender, String street, Integer number,
                            String city, String region, Integer postalCode) {
-        Users user = this.uf.find(userId);
+        Users user = this.uf.findById(userId).orElse(null);
 
         user.setRol(rol);
         user.setUsername(username);
@@ -164,7 +164,7 @@ public class UsersService {
         user.setRegion(region);
         user.setPostalCode(postalCode);
 
-        this.uf.edit(user);
+        this.uf.save(user);
     }
 
     //Cristobal
@@ -207,28 +207,33 @@ public class UsersService {
         System.out.println("sancho");
         System.out.println(rol + ", " + username + ", " + email + ", " + name + ", " + surname + ", " + gender + ", " + street + ", " + number + ", " + city + ", " + region + ", " + postalCode);
 
-        this.uf.create(user);
+        this.uf.save(user);
     }
 
     // Antonio
     public List<UsersDTO> usuariosDTODeUnaLista(int idList) {
-
-        return this.ulf.getUsuariosDTOEnUnaLista(idList);
+        //TODO:HACER CUANDO HAGA FALTA, COCHINO
+       // return this.ulf.getUsuariosDTOEnUnaLista(idList);
+        return null;
 
     }
 
     // Antonio
     public List<UsersDTO> listarUsuariosFiltrado(String nombreUsuario, String orderBy) {
-        return this.uf.listarUsuariosFiltrado(nombreUsuario,orderBy);
+
+        //TODO:HACER CUANDO HAGA FALTA, COCHINO
+
+        //return this.uf.listarUsuariosFiltrado(nombreUsuario,orderBy);
+        return null;
     }
 
 
     public UsersDTO buscarUsuario(Integer usuarioId) {
-        return this.uf.find(usuarioId).toDTO();
+        return this.uf.findById(usuarioId).orElse(null).toDTO();
     }
 
     public Users findUser(Integer usuarioId) {
-        return this.uf.find(usuarioId);
+        return this.uf.findById(usuarioId).orElse(null);
     }
 
 
