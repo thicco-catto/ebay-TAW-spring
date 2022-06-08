@@ -175,9 +175,9 @@
 
 
 <br></br>
-<form action="MarketingBorrarListaServlet?idList=<%=id%>" method="POST">
+
     <table>
-        <tr><td> <input type="submit" value="BorrarLista"></td></tr>
+        <td><a href="/marketing/crearLista/<%=id%>/borrar">BorrarLista</a></td>
     </table>
 </form>
 

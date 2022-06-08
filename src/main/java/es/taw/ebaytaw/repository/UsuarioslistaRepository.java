@@ -38,4 +38,8 @@ public interface UsuarioslistaRepository extends JpaRepository<Usuarioslista, In
 
     Usuarioslista findByUserIDAndAndListID(Users userID, Listausuarios listID);
 
+    void deleteAllByListID(Listausuarios listID);
+
+    List<Usuarioslista> findAllByListID(Listausuarios listID);
+
 }

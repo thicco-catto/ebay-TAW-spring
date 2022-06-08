@@ -31,8 +31,7 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
     List<Users> findAll();
     //Antonio
     Users findByUserID(int userID);
-    //Antonio
-    List<Users> findAllByNameContainingAndOrderByName();
+
 
 
 

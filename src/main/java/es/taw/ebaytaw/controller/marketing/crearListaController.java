@@ -170,9 +170,44 @@ public class crearListaController {
     }
 
 
+    //Este metodo se llama desde CrearLista
+    @GetMapping("{id}/editarDesdeVerListas")
+    public String doEditarDesdeVerListas (@PathVariable("id") int listID, Model model) {
+
+        //Creamos la nueva lista
+        Listausuarios nuevaLista = listausuariosRepository.findByListID(listID);
+        //Conseguimos el nombre de la lista
+        String fname = nuevaLista.getUsername();
+        //Traemos todos los usuarios
+        List<Users> allUsers = usersRepository.findAll();
+        List<UsersDTO> allUsersDTO = new ArrayList<>();
+        for(Users u : allUsers) allUsersDTO.add(u.toDTO());
+        //Traemos los usuarios de la lista
+        List<UsersDTO> listUsersDTO = new ArrayList<>();
+
+
+        //Model
+        //Nombre de la lista
+        model.addAttribute("fname",fname);
+        //id de la lista
+        model.addAttribute("id",listID);
+        //todos los usuarios
+        //Nombre de la lista
+        model.addAttribute("usuarios",allUsersDTO);
+        //usuarios de la lista
+        //Nombre de la lista
+        model.addAttribute("usuarioslista",listUsersDTO);
+
+
+        return "marketing/marketing_editar_lista";
+
+    }
+
+
 
 
     //Este metodo se llama desde CrearLista
+    //TODO:HAY QUE HACERLO NO FUNCIONA
     @PostMapping("/filtrar")
     public String doFiltrar (@RequestParam("id") int listID,
                              @RequestParam("usuariosAdded") List<UsersDTO> usersAddedDTO,
@@ -225,6 +260,18 @@ public class crearListaController {
     }
 
 
+    @GetMapping("{id}/borrar")
+    public String doBorrarLista (@PathVariable("id") int listID){
 
+        Listausuarios listaToDelete = this.listausuariosRepository.findByListID(listID);
+        List<Usuarioslista> UsuarioListaToDelete = this.usuarioslistaRepository.findAllByListID(listaToDelete);
+
+        for(Usuarioslista u : UsuarioListaToDelete) this.usuarioslistaRepository.delete(u);
+        this.listausuariosRepository.delete(listaToDelete);
+
+
+        return "redirect:marketing/marketing_menu";
+
+    }
 
 }

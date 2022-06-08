@@ -21,6 +21,8 @@ public interface ListausuariosRepository extends JpaRepository<Listausuarios, In
 
     Listausuarios findByListID(int listID);
 
+    List<Listausuarios> findAll();
+
 
 
     

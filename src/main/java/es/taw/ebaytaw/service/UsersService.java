@@ -30,12 +30,8 @@ public class UsersService {
 
    // public void setUsersRepository(){}
 
-    @PersistenceContext(unitName = "ebayTAWPU")
-    private EntityManager em;
 
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+
 
 
     //Cristobal

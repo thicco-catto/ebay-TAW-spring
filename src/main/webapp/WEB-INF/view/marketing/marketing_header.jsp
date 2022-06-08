@@ -69,12 +69,12 @@
 <body>
 
 <div class="topnav">
-    <li style="float:right"><a href="LogoutServlet">Salir</a></li>
-    <li style="float:right"><a href="MarketingRedactarMensajeServlet">Crear un nuevo mensaje</a></li>
-    <li style="float:right"><a href="MarketingVerListasServlet">Ver listas</a></li>
-    <li style="float:right"><a href="MarketingCrearServlet">Crear nueva lista</a></li>
+    <li style="float:right"><a href="/salir">Salir</a></li>
+    <li style="float:right"><a href="marketing_crear_mensaje.jsp ">Crear un nuevo mensaje</a></li>
+    <li style="float:right"><a href="marketing/verLista/">Ver listas</a></li>
+    <li style="float:right"><a href="marketing/crearLista/">Crear nueva lista</a></li>
     <li style="float:right"><a href="MarketingMensajesRecibidosServlet?Usuario=<%= marketing.getUserID()%>">Mensajes Recibidos</a></li>
-    <li style="float:right"><a href="MarketingMenuServlet">Menu</a></li>
+    <li style="float:right"><a href="marketing/Controller/menu">Menu</a></li>
 
 
 

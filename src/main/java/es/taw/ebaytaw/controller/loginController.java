@@ -10,10 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class loginController {
+
+    /*
+    private EntityManager em;
+
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+*/
 
     protected UsersService us;
 
@@ -50,6 +60,12 @@ public class loginController {
         }
 
         return goTo;
+    }
+
+    @GetMapping("/salir")
+    public String doExit (HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 
 
