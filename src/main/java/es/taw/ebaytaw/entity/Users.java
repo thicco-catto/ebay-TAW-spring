@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByNumber", query = "SELECT u FROM Users u WHERE u.number = :number")
     , @NamedQuery(name = "Users.findByCity", query = "SELECT u FROM Users u WHERE u.city = :city")
     , @NamedQuery(name = "Users.findByRegion", query = "SELECT u FROM Users u WHERE u.region = :region")
-    , @NamedQuery(name = "Users.findByPostalCode", query = "SELECT u FROM Users u WHERE u.postalCode = :postalCode")})
+    , @NamedQuery(name = "Users.findByPostalCode", query = "SELECT u FROM Users u WHERE u.postalcode = :postalCode")})
 public class Users implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
@@ -86,8 +86,8 @@ public class Users implements Serializable {
     private String city;
     @Column(name = "region", nullable = true, length = 128)
     private String region;
-    @Column(name = "postalCode")
-    private Integer postalCode;
+    @Column(name = "postalcode")
+    private Integer postalcode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
     private List<Categoriesuser> categoriesuserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userID")
@@ -209,11 +209,11 @@ public class Users implements Serializable {
     }
 
     public Integer getPostalCode() {
-        return postalCode;
+        return postalcode;
     }
 
     public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
+        this.postalcode = postalCode;
     }
 
     @XmlTransient
@@ -288,7 +288,7 @@ public class Users implements Serializable {
         dto.setNumber(number);
         dto.setCity(city);
         dto.setRegion(region);
-        dto.setPostalCode(postalCode);
+        dto.setPostalCode(postalcode);
         
         return dto;
     }

@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ListausuariosRepository extends JpaRepository<Listausuarios, Integer> {
 
@@ -13,8 +15,12 @@ public interface ListausuariosRepository extends JpaRepository<Listausuarios, In
     //public void borrarLista(Integer listID);
 
 
+
     @Query("select p.listID from Listausuarios p WHERE p.username like :fname")
-    public int getId(String fname);
+    List<Integer> getId(String fname);
+
+    Listausuarios findByListID(int listID);
+
 
 
     

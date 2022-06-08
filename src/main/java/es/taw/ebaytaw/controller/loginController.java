@@ -36,7 +36,7 @@ public class loginController {
 
     @PostMapping("/autentica")
     public String doAutentica (Model model, HttpSession session, @RequestParam("email") String email, @RequestParam("password") String password) {
-        String goTo = "redirect:/comprador/productosEnVenta";
+        String goTo = "redirect:/login";
 
         UsersDTO usuario = this.us.comprobarCredenciales(email, password);
 

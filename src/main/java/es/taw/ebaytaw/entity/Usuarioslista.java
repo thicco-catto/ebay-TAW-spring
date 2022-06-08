@@ -5,6 +5,8 @@
  */
 package es.taw.ebaytaw.entity;
 
+import org.apache.catalina.User;
+
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -49,6 +51,11 @@ public class Usuarioslista implements Serializable {
 
     public Usuarioslista(Integer id) {
         this.id = id;
+    }
+
+    public Usuarioslista(Users users, Listausuarios list) {
+        this.userID = users;
+        this.listID = list;
     }
 
     public Integer getId() {

@@ -28,7 +28,7 @@
         <tr>
         </tr>
         <tr>
-            <form action="./MarketingCrearServlet" method="POST">
+            <form action="marketing/crearLista/" method="get">
                 <td><input type="submit" value="Crear lista de usuarios" /></td>
             </form>
             <form action="./MarketingVerListasServlet" method="POST">

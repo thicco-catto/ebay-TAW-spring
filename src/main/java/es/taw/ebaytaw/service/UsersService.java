@@ -8,8 +8,13 @@ import es.taw.ebaytaw.entity.Users;
 import es.taw.ebaytaw.DTO.UsersDTO;
 import es.taw.ebaytaw.repository.UsersRepository;
 import es.taw.ebaytaw.repository.UsuarioslistaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +29,13 @@ import java.util.stream.Collectors;
 public class UsersService {
 
    // public void setUsersRepository(){}
+
+    @PersistenceContext(unitName = "ebayTAWPU")
+    private EntityManager em;
+
+    protected EntityManager getEntityManager() {
+        return em;
+    }
 
 
     //Cristobal
@@ -221,22 +233,41 @@ public class UsersService {
         this.uf.save(user);
     }
 
-    // Antonio
-    public List<UsersDTO> usuariosDTODeUnaLista(int idList) {
-        //TODO:HACER CUANDO HAGA FALTA, COCHINO
-       // return this.ulf.getUsuariosDTOEnUnaLista(idList);
-        return null;
-
-    }
-
-    // Antonio
+/*
+    //Antonio
     public List<UsersDTO> listarUsuariosFiltrado(String nombreUsuario, String orderBy) {
 
-        //TODO:HACER CUANDO HAGA FALTA, COCHINO
 
-        //return this.uf.listarUsuariosFiltrado(nombreUsuario,orderBy);
-        return null;
+        String queryStr = "SELECT u FROM Users u ";
+        String where = "WHERE u.name like '%" + nombreUsuario +"%' ";
+        String order = "ORDER BY u." + orderBy;
+
+        if(nombreUsuario != null && !nombreUsuario.isEmpty())
+            queryStr += where;
+
+        if(orderBy != null && !orderBy.isEmpty())
+            queryStr += order;
+
+        Query q = this.getEntityManager().createQuery(queryStr);
+
+        List<Users> lista = q.getResultList();
+
+        List<UserDTO> resultado = new ArrayList<>();
+        for(Users u : lista)
+            resultado.add(u.toDTO());
+
+
+        return resultado;
+
+
     }
+*/
+
+
+
+
+
+
 
 
     public UsersDTO buscarUsuario(Integer usuarioId) {
