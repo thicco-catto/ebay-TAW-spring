@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class loginController {
@@ -28,8 +29,6 @@ public class loginController {
         this.us.setUf(usersRepository);
     }
 
-
-
     @GetMapping("/")
     public String doInit () {        return "login";     }
 
@@ -38,15 +37,20 @@ public class loginController {
     public String doAutentica (Model model, HttpSession session, @RequestParam("email") String email, @RequestParam("password") String password) {
         String goTo = "redirect:/comprador/productosEnVenta";
 
+        List<UsersDTO> usuarios = this.us.listarUsuarios();
         UsersDTO usuario = this.us.comprobarCredenciales(email, password);
 
         if (usuario == null) {
             model.addAttribute("error", "Credenciales incorrectas");
             goTo = "login";
 
-        } else if(usuario.getRol().equals("Marketing")) {
-            session.setAttribute("usuario",usuario);
-            goTo = "marketing/marketing_menu";
+        } else {
+            session.setAttribute("usuario", usuario);
+            if(usuario.getRol().equals("Marketing")) {
+                goTo = "marketing";
+            }else if(usuario.getRol().equals("Administrador")){
+                goTo = "redirect:/administrador/usuarios";
+            }
         }
 
         return goTo;

@@ -44,7 +44,7 @@ public class UsersService {
 
     // Miguel y Cristobal
     public UsersDTO comprobarCredenciales(String email, String pass) {
-        Users usuario = this.uf.findByEmailAndPassword(email, pass);
+        Users usuario = this.uf.comprobarUsuario(email, pass);
         if (usuario == null){
             return null;
         }
@@ -116,15 +116,23 @@ public class UsersService {
     public List<UsersDTO> listarUsuarios(String rol, String username, String email, String name,
                                         String surname, String gender, String street, Integer number,
                                         String city, String region, Integer postalCode) {
+        List<Users> users;
         if ((rol == null || rol.isEmpty()) && (username == null || username.isEmpty()) && (name == null || name.isEmpty()) && (email == null || email.isEmpty())
                 && (surname == null || surname.isEmpty()) && (gender == null || gender.isEmpty()) && (street == null || street.isEmpty())
                 && number == null && (city == null || city.isEmpty()) && (region == null || region.isEmpty()) && postalCode == null) {
-            List<Users> users = this.uf.findAll();
-            return this.listaEntityADTO(users);
+            users = this.uf.findAll();
         } else {
-            List<Users> users = this.uf.getUsers(rol, username, email, name, surname, gender, street, number, city, region, postalCode);
-            return this.listaEntityADTO(users);
+            System.out.println(name.isEmpty());
+            users = this.uf.getUsers(name, username);
+            //users = this.uf.getUsers(rol, username, email, name, surname, gender, street, number, city, region, postalCode);
         }
+        return this.listaEntityADTO(users);
+    }
+
+    public List<UsersDTO> listarUsuarios(UsersDTO userFilter) {
+        return listarUsuarios(userFilter.getRol(), userFilter.getUsername(), userFilter.getEmail(), userFilter.getName(),
+                userFilter.getSurname(), userFilter.getGender(), userFilter.getStreet(), userFilter.getNumber(),
+                userFilter.getCity(), userFilter.getRegion(), userFilter.getPostalCode());
     }
 
     //Cristobal
@@ -246,8 +254,4 @@ public class UsersService {
     public Users findUser(Integer usuarioId) {
         return this.uf.findById(usuarioId).orElse(null);
     }
-
-
-
-
 }
