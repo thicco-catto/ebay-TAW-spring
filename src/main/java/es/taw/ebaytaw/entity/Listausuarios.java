@@ -53,6 +53,9 @@ public class Listausuarios implements Serializable {
     public Listausuarios(Integer listID) {
         this.listID = listID;
     }
+    public Listausuarios(String username) {
+        this.username = username;
+    }
 
     public Listausuarios(Integer listID, String username) {
         this.listID = listID;
