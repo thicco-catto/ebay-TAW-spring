@@ -57,7 +57,7 @@
     <div class="content">
         <h1>Bienvenidx, <%=admin.getUsername()%> </h1>
 
-        <button>Crear Usuario</button>
+        <a href="/administrador/usuarios/crear"><button>Crear Usuario</button></a>
 
         <%--@elvariable id="userFilter" type="es.taw.ebaytaw.DTO.UsersDTO"--%>
         <form:form method="post" action="/administrador/usuarios/filtrar" modelAttribute="userFilter">
@@ -130,8 +130,8 @@
                 <td><%= user.getCity()%></td>
                 <td><%= user.getRegion()%></td>
                 <td><%= user.getPostalCode()%></td>
-                <td><a href="/administrador/usuarios/delete/<%= user.getUserID()%>">Borrar</a></td>
-                <td><a href="/administrador/usuarios/edit/<%= user.getUserID()%>">Editar</a></td>
+                <td><a href="/administrador/usuarios/eliminar/<%= user.getUserID()%>">Borrar</a></td>
+                <td><a href="/administrador/usuarios/editar/<%= user.getUserID()%>">Editar</a></td>
             </tr>
 
             <%

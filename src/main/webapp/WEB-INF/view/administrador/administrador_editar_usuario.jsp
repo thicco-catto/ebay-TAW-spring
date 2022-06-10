@@ -53,9 +53,10 @@
 <body>
 <jsp:include page="administrador_header.jsp" />
 
-<h1>Crear usuario</h1>
+<h1>Editar usuario</h1>
 <%--@elvariable id="user" type="es.taw.ebaytaw.DTO.UsersDTO"--%>
-<form:form method="post" action="/administrador/usuarios/guardarNuevo" modelAttribute="user">
+<form:form method="post" action="/administrador/usuarios/guardarEditado" modelAttribute="user">
+    <form:hidden path="userID"/>
     Username: <form:input path="username"/> <br>
     Contraseña: <form:input path="password"/> <br>
     Email: <form:input path="email"/> <br>
@@ -78,7 +79,7 @@
     Ciudad: <form:input path="city"/> <br>
     Region: <form:input path="region"/> <br>
     Codigo postal: <form:input path="postalCode"/> <br>
-    <form:button>Crear</form:button> <br>
+    <form:button>Editar</form:button> <br>
 </form:form>
 </body>
 </html>

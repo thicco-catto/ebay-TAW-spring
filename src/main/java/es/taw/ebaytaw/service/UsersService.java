@@ -131,8 +131,7 @@ public class UsersService {
             users = this.uf.findAll();
         } else {
             System.out.println(name.isEmpty());
-            users = this.uf.getUsers(name, username);
-            //users = this.uf.getUsers(rol, username, email, name, surname, gender, street, number, city, region, postalCode);
+            users = this.uf.getUsers(rol, username, email, name, surname, gender, street, number, city, region, postalCode);
         }
         return this.listaEntityADTO(users);
     }
@@ -146,6 +145,7 @@ public class UsersService {
     //Cristobal
     public void borrarUsuario(Integer userId) {
         Users user = this.uf.findById(userId).orElse(null); //poner siempre el orElse
+        System.out.println(user);
         this.uf.delete(user);
     }
 
@@ -156,6 +156,12 @@ public class UsersService {
     }
 
     //Cristobal
+    public void editarUser(UsersDTO user){
+        editarUser(user.getUserID(), user.getRol(), user.getUsername(), user.getEmail(), user.getName(),
+                user.getSurname(), user.getGender(), user.getStreet(), user.getNumber(),
+                user.getCity(), user.getRegion(), user.getPostalCode());
+    }
+
     public void editarUser(Integer userId, String rol, String username, String email, String name,
                            String surname, String gender, String street, Integer number,
                            String city, String region, Integer postalCode) {
@@ -192,6 +198,13 @@ public class UsersService {
         user.setPostalCode(postalCode);
 
         this.uf.save(user);
+    }
+
+    //Cristobal
+    public void crearUser(UsersDTO user){
+        crearUser(user.getRol(), user.getUsername(), user.getPassword(), user.getEmail(), user.getName(),
+                user.getSurname(), user.getGender(), user.getStreet(), user.getNumber(),
+                user.getCity(), user.getRegion(), user.getPostalCode());
     }
 
     //Cristobal

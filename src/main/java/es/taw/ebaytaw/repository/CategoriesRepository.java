@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface CategoriesRepository extends JpaRepository<Categories, Integer> {
 
-    @Query("SELECT c FROM Categories c WHERE c.name LIKE :name")
-    public List<Categories> findByName(String name);
+    public Categories getByName(String name);
 
-
+    @Query("select c from Categories c where c.name like %:name%")
+    public List<Categories> getAllByName(String name);
 }
