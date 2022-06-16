@@ -94,6 +94,12 @@ public class ProductService {
     }
 
     //Cristobal
+    public List<ProductsDTO> listarProductos(ProductsDTO producto){
+        return listarProductos(producto.getTitle(), producto.getUserIDint(), producto.getCategoryIDint(),
+                producto.getInitialPrice(), producto.getStartDate(), producto.getFinishDate(), producto.getIsSold());
+    }
+
+    //Cristobal
     public List<ProductsDTO> listarProductos(String title, Integer userId, Integer categoryId, BigDecimal initialPrice, Date startDate, Date finishDate, Boolean isSold) {
         List<Products> productos;
 
@@ -143,8 +149,8 @@ public class ProductService {
         producto.setCategoryID(cat);
         producto.setInitialPrice(pInicial);
         producto.setPhoto(linkFoto);
-        producto.setStartDate(fInicio);
-        producto.setFinishDate(fFin);
+//        producto.setStartDate(fInicio);
+//        producto.setFinishDate(fFin);
         producto.setIsSold(v);
         
         this.pf.save(producto);
@@ -180,7 +186,18 @@ public class ProductService {
         this.pf.save(producto);
     }
 
+    //Cristobal
+    public void editarProducto(ProductsDTO product){
+        editarProducto(product.getProductID(), product.getTitle(), product.getDescription(), product.getPhoto(),
+                product.getCategoryIDint(), product.getInitialPrice(), product.getStartDate(), product.getFinishDate(),
+                product.getIsSold());
+    }
+
     public void setPf(ProductsRepository productsRepository) {
         this.pf = productsRepository;
     }
+
+    public void setCf(CategoriesRepository categoriesRepository) { this.cf = categoriesRepository; }
+
+    public void setUf(UsersRepository usersRepository) { this.uf = usersRepository; }
 }

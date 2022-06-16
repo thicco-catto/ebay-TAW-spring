@@ -8,6 +8,7 @@ package es.taw.ebaytaw.DTO;
 import es.taw.ebaytaw.entity.Bids;
 import es.taw.ebaytaw.entity.Categories;
 import es.taw.ebaytaw.entity.Users;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -27,9 +28,14 @@ public class ProductsDTO {
     private String description;
     private BigDecimal initialPrice;
     private String photo;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date startDate;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date finishDate;
     private Boolean isSold;
+
+    private Integer userIDint;
+    private Integer categoryIDint;
 
     public ProductsDTO() {
     }
@@ -121,9 +127,24 @@ public class ProductsDTO {
     public void setIsSold(Boolean isSold) {
         this.isSold = isSold;
     }
-    
-    
-        public String getStartDateToString() { 
+
+    public Integer getUserIDint() {
+        return userIDint;
+    }
+
+    public void setUserIDint(Integer userIDint) {
+        this.userIDint = userIDint;
+    }
+
+    public Integer getCategoryIDint() {
+        return categoryIDint;
+    }
+
+    public void setCategoryIDint(Integer categoryIDint) {
+        this.categoryIDint = categoryIDint;
+    }
+
+    public String getStartDateToString() {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd.MM.yyyy");
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
         
@@ -162,7 +183,21 @@ public class ProductsDTO {
         
         return mayorPuja;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "ProductsDTO{" +
+                "productID=" + productID +
+                ", userID=" + userID +
+                ", bidsList=" + bidsList +
+                ", categoryID=" + categoryID +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", initialPrice=" + initialPrice +
+                ", photo='" + photo + '\'' +
+                ", startDate=" + startDate +
+                ", finishDate=" + finishDate +
+                ", isSold=" + isSold +
+                '}';
+    }
 }
