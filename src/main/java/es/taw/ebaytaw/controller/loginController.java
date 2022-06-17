@@ -60,6 +60,8 @@ public class loginController {
                 goTo = "marketing";
             }else if(usuario.getRol().equals("Administrador")){
                 goTo = "redirect:/administrador/usuarios";
+            }else if(usuario.getRol().equals("Vendedor")){
+                goTo = "redirect:/vendedor/productos";
             }
         }
 
@@ -71,8 +73,4 @@ public class loginController {
         session.invalidate();
         return "redirect:/";
     }
-
-
-
-
 }

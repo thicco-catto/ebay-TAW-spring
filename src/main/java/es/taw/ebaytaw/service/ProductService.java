@@ -58,7 +58,9 @@ public class ProductService {
     // Miguel
     public List<ProductsDTO> listarProductos (String filtroTitulo, UsersDTO vendedor){
         List<Products> productos = null;
+        System.out.println(vendedor.getUserID());
         Users user = this.uf.findById(vendedor.getUserID()).orElse(null);
+
         if (filtroTitulo == null || filtroTitulo.isEmpty()) {
             productos = this.pf.getAllByUserID(user);
         } else {
@@ -155,7 +157,32 @@ public class ProductService {
         
         this.pf.save(producto);
     }
-    
+
+    //SPRING MIGUEL
+    public void createProduct(ProductsDTO product){
+        createProduct(product.getUserID(), product.getTitle(), product.getDescription(),
+                product.getCategoryID(), product.getInitialPrice(), product.getPhoto());
+    }
+
+    private void createProduct(Users userID, String title, String description, Categories categoryID, BigDecimal initialPrice, String photo) {
+        Products product = new Products();
+        List<Products> productosUsuario = this.pf.getAllByUserID(userID);
+        Users usuario = this.uf.findById(userID.getUserID()).orElse(null);
+
+        product.setUserID(userID);
+        product.setCategoryID(categoryID);
+        product.setTitle(title);
+        product.setDescription(description);
+        product.setInitialPrice(initialPrice);
+        product.setPhoto(photo);
+        this.pf.save(product);
+        usuario.setProductsList(productosUsuario);
+        this.uf.save(usuario);
+    }
+
+
+
+
     //Miguel
     public void crearProducto(String id, String titulo, String descripcion, String categoria, BigDecimal precio, String foto, Date finicio, Date ffin){
         Products producto = new Products();
@@ -200,4 +227,5 @@ public class ProductService {
     public void setCf(CategoriesRepository categoriesRepository) { this.cf = categoriesRepository; }
 
     public void setUf(UsersRepository usersRepository) { this.uf = usersRepository; }
+
 }

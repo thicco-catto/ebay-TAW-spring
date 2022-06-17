@@ -70,8 +70,8 @@
 <body>
 
 <div class="topnav">
-    <li style="float:right"><a class="active" href="">Home</a></li>
-    <li style="float:right"><a class="active" href="homeRegisterServlet">Registrate como vendedor</a></li>
+    <li style="float:right"><a class="active" href="/vendedor/newvendedor/toHome">Home</a></li>
+    <li style="float:right"><a class="active" href="/vendedor/newvendedor">Registrate como vendedor</a></li>
 </div>
 
 <div class="content">
