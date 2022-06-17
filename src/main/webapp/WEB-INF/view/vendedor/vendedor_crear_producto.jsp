@@ -57,51 +57,49 @@
 <div class="content">
     <h5>Recuerda, todos los campos son obligatorios</h5>
 
-    <table>
-    <%--@elvariable id="product" type="es.taw.ebaytaw.DTO.ProductsDTO"--%>
-    <form:form method="post" action="/vendedor/productos/crear" modelAttribute="product">
-        <form:input path="userID" value="<%= vendedor.getUserID() %>" type="hidden"/>
-        <tr>
-            <td>Titulo:</td>
-            <td><form:input path="title" required="true"/></td>
-        </tr>
+    <form method="post" action="/vendedor/productos/crearproducto">
+        <table>
+            <tr>
+                <td>Titulo:</td>
+                <td><input required type="text" name="titulo" value=""></td>
+            </tr>
 
-        <tr>
-            <td>Descripcion:</td>
-            <td><form:input path="description" required="true"/></td>
-        </tr>
-        
-        <tr>
-            <td>Categoria:</td>
-            <td><form:select path="categoryID">
-                <% for(CategoriesDTO categoria:categorias){%>
-                <form:option required="true" value="<%= categoria.getName() %>"><%= categoria.getName() %></form:option>
-                <%}%></form:select></td
-        </tr>
+            <tr>
+                <td>Descripcion:</td>
+                <td><input required type="text" name="descripcion" value=""></td>
+            </tr>
 
-        <tr>
-            <td>Precio inicial:</td>
-            <td><form:input path="initialPrice" required="true" /></td>
-        </tr>
+            <tr>
+                <td>Categoria:</td>
+                <td><select name="categoria">
+                    <%for(CategoriesDTO categoria:categorias){%>
+                    <option value="<%= categoria.getName() %>"><%= categoria.getName() %></option>
+                    <%}%></select></td>
+            </tr>
 
-        <tr>
-            <td>Link fotografia:</td>
-            <td><form:input path="photo" required="true" /></td>
-        </tr>
-        <!--
-        <tr>
-            <td>Fecha inicio:</td>
-            <td></td>
-        </tr>
+            <tr>
+                <td>Precio Inical:</td>
+                <td><input required type="number" name="precioInicial" value=""></td>
+            </tr>
 
-        <tr>
-            <td>Fecha fin:</td>
-            <td></td>
-        </tr>
-        -->
+            <tr>
+                <td>Link fotografia:</td>
+                <td><input required type="text" name="foto" value=""></td>
+            </tr>
+
+            <tr>
+                <td>Fecha inicio:</td>
+                <td><input required type="date" name="fechaInicio" value=""></td>
+            </tr>
+
+            <tr>
+                <td>Fecha fin</td>
+                <td><input required type="date" name="fechaFin" value=""></td>
+            </tr>
+
         </table>
-        <form:button>Crear</form:button>
-    </form:form>
+        <input type="submit" value="Crear" />
+    </form>
 
 </div>
 

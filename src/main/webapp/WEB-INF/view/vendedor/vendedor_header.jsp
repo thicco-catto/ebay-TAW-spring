@@ -77,10 +77,10 @@
     <li style="float:right"><a href="/vendedor/productos/tocrearproducto">Nuevo producto</a></li>
 
 </div>
-<!--
+
 <div class="content">
     <p>Session ID: <%=session.getId()%></p>
 </div>
--->
+
 </body>
 </html>

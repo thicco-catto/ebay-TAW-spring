@@ -16,6 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -102,10 +106,33 @@ public class vendedorProductosController {
         return "/vendedor/vendedor_crear_producto";
     }
 
-    @PostMapping("/crear")
-    public String createProduct(@ModelAttribute("product") ProductsDTO product, HttpSession session){
+
+    @PostMapping("/crearproducto")
+    public String createProduct(String titulo, String descripcion, String categoria,
+                                String precioInicial, String foto, String fechaInicio,
+                                String fechaFin, HttpSession session){
+
         UsersDTO vendedor = (UsersDTO)session.getAttribute("usuario");
-        //product.setUserID(vendedor);
+        Integer id = vendedor.getUserID();
+        BigDecimal pInicial = new BigDecimal(precioInicial);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fInicio = null;
+        try {
+            fInicio = format.parse(fechaInicio);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date fFin = null;
+        try {
+            fFin = format.parse(fechaFin);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(fFin);
+
+        this.ps.crearProducto(id, titulo, descripcion, categoria, pInicial, foto, fInicio, fFin);
 
         return "redirect:/vendedor/productos";
     }

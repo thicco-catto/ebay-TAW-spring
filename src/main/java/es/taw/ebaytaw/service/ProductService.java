@@ -16,6 +16,8 @@ import es.taw.ebaytaw.repository.UsersRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -158,36 +160,12 @@ public class ProductService {
         this.pf.save(producto);
     }
 
-    //SPRING MIGUEL
-    public void createProduct(ProductsDTO product){
-        createProduct(product.getUserID(), product.getTitle(), product.getDescription(),
-                product.getCategoryID(), product.getInitialPrice(), product.getPhoto());
-    }
-
-    private void createProduct(Users userID, String title, String description, Categories categoryID, BigDecimal initialPrice, String photo) {
-        Products product = new Products();
-        List<Products> productosUsuario = this.pf.getAllByUserID(userID);
-        Users usuario = this.uf.findById(userID.getUserID()).orElse(null);
-
-        product.setUserID(userID);
-        product.setCategoryID(categoryID);
-        product.setTitle(title);
-        product.setDescription(description);
-        product.setInitialPrice(initialPrice);
-        product.setPhoto(photo);
-        this.pf.save(product);
-        usuario.setProductsList(productosUsuario);
-        this.uf.save(usuario);
-    }
-
-
-
 
     //Miguel
-    public void crearProducto(String id, String titulo, String descripcion, String categoria, BigDecimal precio, String foto, Date finicio, Date ffin){
+    public void crearProducto(Integer id, String titulo, String descripcion, String categoria, BigDecimal precio, String foto, Date finicio, Date ffin){
         Products producto = new Products();
         Categories cat = this.cf.getByName(categoria);
-        Users usuario = this.uf.findById(Integer.parseInt(id)).orElse(null);
+        Users usuario = this.uf.findById(id).orElse(null);
         List<Products> productosUsuario = this.pf.getAllByUserID(usuario);
         
         producto.setUserID(usuario);

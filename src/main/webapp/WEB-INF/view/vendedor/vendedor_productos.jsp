@@ -53,10 +53,7 @@
 <body>
     <jsp:include page="vendedor_header.jsp" />
     <div class="content">
-        <h1>Bienvenidx, <%=vendedor.getUsername()%> </h1>
-        <!-- FILTROS -->
-        <h5>Filtra tus productos:</h5>
-
+        <h1 style="padding: 0; margin: 0">Bienvenidx, <%=vendedor.getUsername()%> </h1>
 
         <!-- TABLA PRODUCTOS -->
         <%if (productos == null || productos.isEmpty()){%>
