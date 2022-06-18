@@ -7,7 +7,7 @@ import es.taw.ebaytaw.repository.CategoriesRepository;
 import es.taw.ebaytaw.repository.ProductsRepository;
 import es.taw.ebaytaw.repository.UsersRepository;
 import es.taw.ebaytaw.service.CategoriesService;
-import es.taw.ebaytaw.service.ProductService;
+import es.taw.ebaytaw.service.ProductsService;
 import es.taw.ebaytaw.service.UsersService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +26,11 @@ import java.util.List;
 @RequestMapping("/vendedor/productos")
 public class vendedorProductosController {
 
-    protected ProductService ps;
+    protected ProductsService ps;
     protected CategoriesService cs;
 
     @Autowired
-    public void setProductService(ProductService productService, ProductsRepository productsRepository,
+    public void setProductService(ProductsService productService, ProductsRepository productsRepository,
                                   UsersRepository usersRepository, CategoriesRepository categoriesRepository){
         this.ps = productService;
         this.ps.setPf(productsRepository);

@@ -68,7 +68,7 @@
     <body>
         
         <div class="topnav">
-            <li style="float:right"><a href="LogoutServlet">Salir</a></li>
+            <li style="float:right"><a href="/salir">Salir</a></li>
             <li style="float:right"><a href="/administrador/usuarios">Lista de usuarios</a></li>
             <li style="float:right"><a href="/administrador/productos">Lista de productos</a></li>
             <li style="float:right"><a href="/administrador/categorias">Lista de categorias</a></li>
