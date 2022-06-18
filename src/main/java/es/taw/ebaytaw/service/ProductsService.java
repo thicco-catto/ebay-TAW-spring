@@ -5,18 +5,24 @@
  */
 package es.taw.ebaytaw.service;
 
+import es.taw.ebaytaw.DTO.BidsDTO;
 import es.taw.ebaytaw.DTO.ProductsDTO;
 import es.taw.ebaytaw.DTO.UsersDTO;
+import es.taw.ebaytaw.entity.Bids;
 import es.taw.ebaytaw.entity.Categories;
 import es.taw.ebaytaw.entity.Products;
 import es.taw.ebaytaw.entity.Users;
+import es.taw.ebaytaw.repository.BidsRepository;
 import es.taw.ebaytaw.repository.CategoriesRepository;
 import es.taw.ebaytaw.repository.ProductsRepository;
 import es.taw.ebaytaw.repository.UsersRepository;
+import es.taw.ebaytaw.vo.ProductsFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,12 +31,30 @@ import java.util.List;
  * @author mjura
  */
 @Service
-public class ProductService {
-    
+public class ProductsService {
+    private BidsRepository bidsRepository;
+    private UsersRepository usersRepository;
+    private ProductsRepository productsRepository;
+
+    @Autowired
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+
+    @Autowired
+    public void setBidsRepository(BidsRepository bidsRepository) {
+        this.bidsRepository = bidsRepository;
+    }
+
+    @Autowired
+    public void setProductsRepository(ProductsRepository productsRepository) {
+        this.productsRepository = productsRepository;
+    }
+
     ProductsRepository pf;
     CategoriesRepository cf;
     UsersRepository uf;
-    
+
     public List<ProductsDTO> listaEntityADTO (List<Products> lista){
         List<ProductsDTO> listaDTO = null;
         if (lista != null) {
@@ -182,5 +206,64 @@ public class ProductService {
 
     public void setPf(ProductsRepository productsRepository) {
         this.pf = productsRepository;
+    }
+
+    // Denis
+    public List<ProductsDTO> listarProductosEnVenta(ProductsFilter filtroProductos) {
+        List<Products> listaProductos;
+
+        if (filtroProductos.getTitleAndDescription() != null && !filtroProductos.getTitleAndDescription().isEmpty()) {
+            if (filtroProductos.getCategoriesArray() != null && filtroProductos.getCategoriesArray().length > 0) {
+                listaProductos = this.pf.findByTitleDescriptionAndCategory(filtroProductos.getTitleAndDescription(), filtroProductos.getCategoriesArray());
+            } else {
+                listaProductos = this.productsRepository.findByTitleDescription(filtroProductos.getTitleAndDescription());
+            }
+        } else {
+            if (filtroProductos.getCategoriesArray() != null && filtroProductos.getCategoriesArray().length > 0) {
+                listaProductos = this.pf.findByCategory(filtroProductos.getCategoriesArray());
+            } else {
+                listaProductos = this.productsRepository.findAll();
+            }
+        }
+
+        return this.listaEntityADTO(listaProductos);
+    }
+
+    // Denis
+    public List<ProductsDTO> listarProductosPujados(UsersDTO usuario, ProductsFilter filtroProductos) {
+        Users comprador = this.usersRepository.findByUserId(usuario.getUserID());
+        List<ProductsDTO> listaProductosDTO = null;
+
+        if (comprador != null) {
+            List<Bids> listaPujas = this.bidsRepository.findByUserId(comprador.getUserID());
+
+            if (listaPujas != null && !listaPujas.isEmpty()) {
+                List<Integer> listaProductosId = new ArrayList<>();
+
+                for (Bids puja : listaPujas) {
+                    listaProductosId.add(puja.getProductID().getProductID());
+                }
+
+                List<Products> listaProductos;
+
+                if (filtroProductos.getTitleAndDescription() != null && !filtroProductos.getTitleAndDescription().isEmpty()) {
+                    if (filtroProductos.getCategoriesArray() != null && filtroProductos.getCategoriesArray().length > 0) {
+                        listaProductos = this.pf.findByIdsAndTitleDescriptionAndCategory(listaProductosId, filtroProductos.getTitleAndDescription(), filtroProductos.getCategoriesArray());
+                    } else {
+                        listaProductos = this.pf.findByIdsAndTitleDescription(listaProductosId, filtroProductos.getTitleAndDescription());
+                    }
+                } else {
+                    if (filtroProductos.getCategoriesArray() != null && filtroProductos.getCategoriesArray().length > 0) {
+                        listaProductos = this.pf.findByIdAndCategory(listaProductosId, filtroProductos.getCategoriesArray());
+                    } else {
+                        listaProductos = this.pf.findByIds(listaProductosId);
+                    }
+                }
+
+                listaProductosDTO = this.listaEntityADTO(listaProductos);
+            }
+        }
+
+        return listaProductosDTO;
     }
 }

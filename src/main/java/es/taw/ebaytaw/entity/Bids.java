@@ -8,7 +8,6 @@ package es.taw.ebaytaw.entity;
 import es.taw.ebaytaw.DTO.BidsDTO;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -123,7 +121,7 @@ public class Bids implements Serializable {
         dto.setBidID(bidID);
         dto.setProductID(productID);
         dto.setUserID(userID);
-        dto.setPriceBid(price);
+        dto.setPrice(price);
         
         return dto;
     }

@@ -63,72 +63,77 @@
     </head>
     <body>
         <div class="topnav">
-            <li style="float:right"><a class="active" href="/ebayTAW/">Inicio</a></li>
-            <li style="float:right"><a class="active" href="homeRegisterServlet">Regístrese como vendedor</a></li>
-            <li style="float:right"><a class="active" href="RegistrarCompradorServlet">Regístrese como comprador</a></li>
+            <li style="float:right"><a class="active" href="/">Inicio</a></li>
+            <li style="float:right"><a class="active" href="/vendedor/registro">Regístrese como vendedor</a></li>
+            <li style="float:right"><a class="active" href="/comprador/registro">Regístrese como comprador</a></li>
         </div>
         
         <div class="content">
             <h1>Bienvenido, nuevo comprador</h1>
         
-            <form:form method="POST" action="AnadirUsuarioCompradorServlet">
+            <form:form method="POST" action="/comprador/registrar" modelAttribute="comprador">
                 <table border="0">
                     <tbody>
                         <tr>
                             <td colspan="4"><b>Cuenta</b></td>
                         </tr>
                         <tr>
+                            <form:hidden path="userID" />
                             <td>Nombre de usuario *:</td>
-                            <td><form:input type="text" path="nombreUsuario" value="" required="true" /></td>
+                            <td><form:input type="text" path="username" required="true" /></td>
                         </tr>
                         <tr>
                             <td>Correo *:</td>
-                            <td><form:input type="text" path="correo" value="" required="true" /></td>
+                            <td><form:input type="text" path="email" required="true" /></td>
                         </tr>
                         <tr>
                             <td>Contraseña *:</td>
-                            <td><form:input type="password" path="contrasena" value="" required="true" /></td>
+                            <td><form:input type="password" path="password" required="true" /></td>
                         </tr>
                         <tr>
                             <td colspan="4"><br/><b>Usuario</b></td>
                         </tr>
                         <tr>
                             <td>Nombre:</td>
-                            <td><form:input type="text" path="nombre" value="" /></td>
+                            <td><form:input type="text" path="name" /></td>
                         </tr>
                         <tr>
                             <td>Apellidos:</td>
-                            <td><form:input type="text" path="apellidos" value="" /></td>
+                            <td><form:input type="text" path="surname" /></td>
                         </tr>
                         <tr>
                             <td>Sexo:</td>
-                            <td><form:select path="sexo">
+                            <td>
+                                <form:select path="gender">
                                     <form:option value="Hombre">Hombre</form:option>
                                     <form:option value="Mujer">Mujer</form:option>
                                     <form:option value="No Binario" selected="true">Indeterminado</form:option>
-                                </form:select></td>
+                                </form:select>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="4"><br/><b>Domicilio</b></td>
                         </tr>
                         <tr>
                             <td>Calle:</td>
-                            <td><form:input type="text" path="calle" value="" /></td>
+                            <td><form:input type="text" path="street" /></td>
                             <td>Número:</td>
-                            <td><form:input type="number" path="numero" value="" /></td>
+                            <td><form:input type="number" path="number" /></td>
                         </tr>
                         <tr>
                             <td>Ciudad:</td>
-                            <td><form:input type="text" path="ciudad" value="" /></td>
+                            <td><form:input type="text" path="city" /></td>
                             <td>Código postal:</td>
-                            <td><form:input type="number" path="codigoPostal" value="" /></td>
+                            <td><form:input type="number" path="postalCode" /></td>
                         </tr>
                         <tr>
                             <td>Región:</td>
-                            <td><form:input type="text" path="region" value="" /></td>
+                            <td><form:input type="text" path="region" /></td>
                         </tr>
                         <tr>
-                            <td colspan="4"><br/><input type="submit" value="Registrarse" /></td>
+                            <td colspan="4"><br/>
+                                <form:button type="submit">Registrarse</form:button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

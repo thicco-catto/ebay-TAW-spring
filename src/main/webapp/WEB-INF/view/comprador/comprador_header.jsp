@@ -89,7 +89,7 @@
                 background-color: #e3e3e3;
             }
             
-            input.botonverde { 
+            button.botonverde {
                 background-color: #4CAF50; 
                 border: 2px solid #4CAF50;
                 color: white;
@@ -104,11 +104,11 @@
                 transition-duration: 0.4s;
             }
             
-            input.botonverde:hover {
+            button.botonverde:hover {
                 background-color: #5FD764;
             }
             
-            input.botonrojo { 
+            button.botonrojo {
                 background-color: white; 
                 color: #f44336; 
                 border: 2px solid #f44336;
@@ -123,12 +123,12 @@
                 transition-duration: 0.4s;
             }
             
-            input.botonrojo:hover {
+            button.botonrojo:hover {
                 background-color: #f44336;
                 color: white;
             }
             
-            input.botonazul { 
+            button.botonazul {
                 background-color: #008CBA;
                 cursor: pointer;
                 border: 2px solid #008CBA;
@@ -143,7 +143,7 @@
                 transition-duration: 0.4s;
             }
             
-            input.botonazul:hover {
+            button.botonazul:hover {
                 background-color: #00ABE3;
             }
             
@@ -152,13 +152,13 @@
     </head>
     <body>
         <div class="topnav">
-            <li style="float:right"><a href="LogoutServlet">Salir</a></li>
-            <li style="float:right"><a href="ProductosEnVentaCompradorServlet">Productos en venta</a></li>
-            <li style="float:right"><a href="ProductosPujadosCompradorServlet">Productos pujados</a></li>
+            <li style="float:right"><a href="/salir">Salir</a></li>
+            <li style="float:right"><a href="/comprador/productos/en-venta">Productos en venta</a></li>
+            <li style="float:right"><a href="/comprador/productos/pujados">Productos pujados</a></li>
         </div>
         
         <div class="content"> 
-            <h3>Bienvenido, <%= comprador.getUsername() %> </h3>
+            <h3>Bienvenido, <% if (comprador != null) { %><%= comprador.getUsername() %><% } %> </h3>
         </div>
     </body>
 </html>

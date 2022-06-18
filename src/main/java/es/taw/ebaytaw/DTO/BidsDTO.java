@@ -16,18 +16,10 @@ import java.math.BigDecimal;
  * @author 34637
  */
 public class BidsDTO {
-    private BigDecimal priceBid;
     private Integer bidID;
     private Products productID;
     private Users userID;
-
-    public BigDecimal getPriceBid() {
-        return priceBid;
-    }
-
-    public void setPriceBid(BigDecimal priceBid) {
-        this.priceBid = priceBid;
-    }
+    private BigDecimal price;
 
     public Integer getBidID() {
         return bidID;
@@ -52,6 +44,13 @@ public class BidsDTO {
     public void setUserID(Users userID) {
         this.userID = userID;
     }
-    
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
     
 }

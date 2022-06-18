@@ -10,6 +10,7 @@ import es.taw.ebaytaw.entity.Categories;
 import es.taw.ebaytaw.repository.CategoriesRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,5 +74,23 @@ public class CategoriesService {
 
     public void setCf(CategoriesRepository categoriesRepository) {
         this.cf = categoriesRepository;
+    }
+
+    // Denis
+    public List<CategoriesDTO> convertirListaCategoriasADTO(List<Categories> listaCategorias) {
+        List<CategoriesDTO> listaCategoriasDTO = null;
+
+        if (listaCategorias != null) {
+            listaCategoriasDTO = new ArrayList<>();
+            for (Categories categoria : listaCategorias) {
+                listaCategoriasDTO.add(categoria.toDTO());
+            }
+        }
+
+        return listaCategoriasDTO;
+    }
+
+    public List<CategoriesDTO> listarCategorias() {
+        return this.convertirListaCategoriasADTO(this.cf.findAll());
     }
 }

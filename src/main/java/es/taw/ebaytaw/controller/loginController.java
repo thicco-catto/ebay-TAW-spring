@@ -40,7 +40,9 @@ public class loginController {
     }
 
     @GetMapping("/")
-    public String doInit () {        return "login";     }
+    public String doInit () {
+        return "login";
+    }
 
 
     @PostMapping("/autentica")
@@ -56,10 +58,17 @@ public class loginController {
 
         } else {
             session.setAttribute("usuario", usuario);
-            if(usuario.getRol().equals("Marketing")) {
-                goTo = "marketing";
-            }else if(usuario.getRol().equals("Administrador")){
-                goTo = "redirect:/administrador/usuarios";
+
+            switch (usuario.getRol()) {
+                case "Marketing":
+                    goTo = "marketing";
+                    break;
+                case "Administrador":
+                    goTo = "redirect:/administrador/usuarios";
+                    break;
+                case "Comprador":
+                    goTo = "redirect:/comprador/";
+                    break;
             }
         }
 
@@ -71,8 +80,5 @@ public class loginController {
         session.invalidate();
         return "redirect:/";
     }
-
-
-
 
 }

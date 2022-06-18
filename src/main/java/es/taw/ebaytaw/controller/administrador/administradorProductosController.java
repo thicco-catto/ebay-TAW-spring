@@ -3,12 +3,11 @@ package es.taw.ebaytaw.controller.administrador;
 import es.taw.ebaytaw.DTO.CategoriesDTO;
 import es.taw.ebaytaw.DTO.ProductsDTO;
 import es.taw.ebaytaw.DTO.UsersDTO;
-import es.taw.ebaytaw.entity.Products;
 import es.taw.ebaytaw.repository.CategoriesRepository;
 import es.taw.ebaytaw.repository.ProductsRepository;
 import es.taw.ebaytaw.repository.UsersRepository;
 import es.taw.ebaytaw.service.CategoriesService;
-import es.taw.ebaytaw.service.ProductService;
+import es.taw.ebaytaw.service.ProductsService;
 import es.taw.ebaytaw.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,7 @@ import java.util.List;
 @RequestMapping("/administrador/productos")
 public class administradorProductosController {
     protected UsersService us;
-    protected ProductService ps;
+    protected ProductsService ps;
     protected CategoriesService cs;
 
     @Autowired
@@ -32,7 +31,7 @@ public class administradorProductosController {
     }
 
     @Autowired
-    public void setProductsService(ProductService productsService, ProductsRepository productsRepository){
+    public void setProductsService(ProductsService productsService, ProductsRepository productsRepository){
         this.ps = productsService;
         this.ps.setPf(productsRepository);
     }

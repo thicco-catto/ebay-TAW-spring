@@ -5,12 +5,6 @@
  */
 package es.taw.ebaytaw.DTO;
 
-import es.taw.ebaytaw.entity.Users;
-import org.springframework.data.jpa.repository.Query;
-
-import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -30,8 +24,6 @@ public class UsersDTO {
     private String city;
     private String region;
     private Integer postalCode;
-
-    EntityManager em;
    
     public UsersDTO() {
     }
@@ -139,11 +131,4 @@ public class UsersDTO {
     public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
     }
-
-
-
-
-
-
-    
 }

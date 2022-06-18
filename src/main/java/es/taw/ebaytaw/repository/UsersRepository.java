@@ -32,4 +32,8 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
     List<Users> findAll();
     //Antonio
     Users findByUserID(int userID);
+
+    // Denis
+    @Query("SELECT u FROM Users u WHERE u.userID = :userID")
+    Users findByUserId(@Param("userID") Integer userID);
 }

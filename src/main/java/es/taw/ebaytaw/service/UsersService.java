@@ -8,6 +8,7 @@ import es.taw.ebaytaw.entity.Users;
 import es.taw.ebaytaw.DTO.UsersDTO;
 import es.taw.ebaytaw.repository.UsersRepository;
 import es.taw.ebaytaw.repository.UsuarioslistaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,14 @@ import java.util.stream.Collectors;
 //@Stateless
 @Service
 public class UsersService {
+    private UsersRepository usersRepository;
 
-   // public void setUsersRepository(){}
+    @Autowired
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+
+    // public void setUsersRepository(){}
 
 
 
@@ -293,5 +300,26 @@ public class UsersService {
 
     public Users findUser(Integer usuarioId) {
         return this.uf.findById(usuarioId).orElse(null);
+    }
+
+    // Denis
+    public void guardarComprador(UsersDTO usuarioDTO) {
+        Users comprador = new Users();
+
+        comprador.setUserID(usuarioDTO.getUserID());
+        comprador.setRol("Comprador");
+        comprador.setUsername(usuarioDTO.getUsername());
+        comprador.setPassword(usuarioDTO.getPassword());
+        comprador.setEmail(usuarioDTO.getEmail());
+        comprador.setName(usuarioDTO.getName());
+        comprador.setSurname(usuarioDTO.getSurname());
+        comprador.setGender(usuarioDTO.getGender());
+        comprador.setStreet(usuarioDTO.getStreet());
+        comprador.setNumber(usuarioDTO.getNumber());
+        comprador.setCity(usuarioDTO.getCity());
+        comprador.setRegion(usuarioDTO.getRegion());
+        comprador.setPostalCode(usuarioDTO.getPostalCode());
+
+        this.usersRepository.save(comprador);
     }
 }

@@ -72,6 +72,7 @@
 <div class="topnav">
     <li style="float:right"><a class="active" href="">Home</a></li>
     <li style="float:right"><a class="active" href="homeRegisterServlet">Registrate como vendedor</a></li>
+    <li style="float:right"><a class="active" href="/comprador/registro">Regístrese como comprador</a></li>
 </div>
 
 <div class="content">
