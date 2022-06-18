@@ -69,6 +69,9 @@ public class loginController {
                 case "Comprador":
                     goTo = "redirect:/comprador/";
                     break;
+                case "Vendedor":
+                    goTo = "redirect:/vendedor/productos";
+                    break;
             }
         }
 

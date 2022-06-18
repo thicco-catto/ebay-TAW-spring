@@ -212,7 +212,10 @@ public class Products implements Serializable {
         dto.setBidsList(bidsList);
         dto.setCategoryID(categoryID);
         dto.setUserID(userID);
-        
+
+        dto.setCategoryIDint(categoryID.getCategoryID());
+        dto.setUserIDint(userID.getUserID());
+
         return dto;
     }
     

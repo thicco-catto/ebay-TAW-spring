@@ -60,15 +60,13 @@
     Contraseña: <form:input path="password"/> <br>
     Email: <form:input path="email"/> <br>
     Rol: <form:select path="rol">
-    <form:option value="Administrador">Administrador</form:option>
-    <form:option value="Vendedor">Vendedor</form:option>
     <form:option value="Marketing">Marketing</form:option>
-    <form:option value="Comprador">Comprador</form:option>
     <form:option value="Analista">Analista</form:option>
 </form:select><br>
     Nombre: <form:input path="name"/> <br>
     Apellidos: <form:input path="surname"/> <br>
     Genero: <form:select path="gender">
+    <form:option value="">- - -</form:option>
     <form:option value="Hombre">Hombre</form:option>
     <form:option value="Mujer">Mujer</form:option>
     <form:option value="No binario">No binario</form:option>

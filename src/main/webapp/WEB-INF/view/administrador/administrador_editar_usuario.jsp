@@ -70,6 +70,7 @@
     Nombre: <form:input path="name"/> <br>
     Apellidos: <form:input path="surname"/> <br>
     Genero: <form:select path="gender">
+    <form:option value="">- - -</form:option>
     <form:option value="Hombre">Hombre</form:option>
     <form:option value="Mujer">Mujer</form:option>
     <form:option value="No binario">No binario</form:option>

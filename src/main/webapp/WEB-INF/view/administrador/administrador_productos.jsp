@@ -66,11 +66,17 @@
             <%--@elvariable id="productFilter" type="es.taw.ebaytaw.DTO.ProductsDTO"--%>
             <form:form method="post" action="/administrador/productos/filtrar" modelAttribute="productFilter">
                 Titulo: <form:input path="title"/> <br>
-                Usuario: <form:select path="userID" items="${users}" itemLabel="username" itemValue="userID"/> <br>
-                Categoria: <form:select path="categoryID" items="${categories}" itemLabel="name" itemValue="categoryID"/> <br>
+                Usuario: <form:select path="userIDint">
+                    <form:option value="">- - -</form:option>
+                    <form:options items="${users}" itemValue="userID" itemLabel="username"/>
+                </form:select><br>
+                Categoria: <form:select path="categoryIDint">
+                    <form:option value="">- - -</form:option>
+                    <form:options items="${categories}" itemValue="categoryID" itemLabel="name"/>
+                </form:select><br>
                 Precio inicial: <form:input path="initialPrice"/> <br>
-                Fecha de inicio: <form:input path="startDate"/> <br>
-                Fecha de fin: <form:input path="finishDate"/> <br>
+                Fecha de inicio: <form:input type="date" path="startDate"/> <br>
+                Fecha de fin: <form:input type="date" path="finishDate"/> <br>
                 Vendido <form:select path="isSold">
                     <form:option value="">- - -</form:option>
                     <form:option value="True">Si</form:option>
@@ -80,7 +86,7 @@
             </form:form>
 
             <%
-                List<ProductsDTO> productos = (List) request.getAttribute("productos");
+                List<ProductsDTO> productos = (List) request.getAttribute("products");
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 if (productos == null || productos.isEmpty()) {
             %>
@@ -119,8 +125,8 @@
                     <td><%= format.format(producto.getStartDate())%></td>
                     <td><%= format.format(producto.getFinishDate())%></td>
                     <td><%= producto.getIsSold()%></td>
-                    <td><a href="AdministradorBorrarProductoServlet?id=<%= producto.getProductID()%>">Borrar</a></td>
-                    <td><a href="AdministradorEditarProductoServlet?id=<%= producto.getProductID()%>">Editar</a></td>
+                    <td><a href="/administrador/productos/eliminar/<%= producto.getProductID()%>">Borrar</a></td>
+                    <td><a href="/administrador/productos/editar/<%= producto.getProductID()%>">Editar</a></td>
                 </tr>
 
                 <%

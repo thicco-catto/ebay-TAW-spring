@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -82,7 +84,9 @@ public class ProductsService {
     // Miguel
     public List<ProductsDTO> listarProductos (String filtroTitulo, UsersDTO vendedor){
         List<Products> productos = null;
+        System.out.println(vendedor.getUserID());
         Users user = this.uf.findById(vendedor.getUserID()).orElse(null);
+
         if (filtroTitulo == null || filtroTitulo.isEmpty()) {
             productos = this.pf.getAllByUserID(user);
         } else {
@@ -115,6 +119,12 @@ public class ProductsService {
         producto.setFinishDate(fechaFin);
         producto.setIsSold(vendido);
         this.pf.save(producto);
+    }
+
+    //Cristobal
+    public List<ProductsDTO> listarProductos(ProductsDTO producto){
+        return listarProductos(producto.getTitle(), producto.getUserIDint(), producto.getCategoryIDint(),
+                producto.getInitialPrice(), producto.getStartDate(), producto.getFinishDate(), producto.getIsSold());
     }
 
     //Cristobal
@@ -167,18 +177,19 @@ public class ProductsService {
         producto.setCategoryID(cat);
         producto.setInitialPrice(pInicial);
         producto.setPhoto(linkFoto);
-        producto.setStartDate(fInicio);
-        producto.setFinishDate(fFin);
+//        producto.setStartDate(fInicio);
+//        producto.setFinishDate(fFin);
         producto.setIsSold(v);
         
         this.pf.save(producto);
     }
-    
+
+
     //Miguel
-    public void crearProducto(String id, String titulo, String descripcion, String categoria, BigDecimal precio, String foto, Date finicio, Date ffin){
+    public void crearProducto(Integer id, String titulo, String descripcion, String categoria, BigDecimal precio, String foto, Date finicio, Date ffin){
         Products producto = new Products();
         Categories cat = this.cf.getByName(categoria);
-        Users usuario = this.uf.findById(Integer.parseInt(id)).orElse(null);
+        Users usuario = this.uf.findById(id).orElse(null);
         List<Products> productosUsuario = this.pf.getAllByUserID(usuario);
         
         producto.setUserID(usuario);
@@ -204,9 +215,21 @@ public class ProductsService {
         this.pf.save(producto);
     }
 
+    //Cristobal
+    public void editarProducto(ProductsDTO product){
+        editarProducto(product.getProductID(), product.getTitle(), product.getDescription(), product.getPhoto(),
+                product.getCategoryIDint(), product.getInitialPrice(), product.getStartDate(), product.getFinishDate(),
+                product.getIsSold());
+    }
+
     public void setPf(ProductsRepository productsRepository) {
         this.pf = productsRepository;
     }
+
+    public void setCf(CategoriesRepository categoriesRepository) { this.cf = categoriesRepository; }
+
+    public void setUf(UsersRepository usersRepository) { this.uf = usersRepository; }
+
 
     // Denis
     public List<ProductsDTO> listarProductosEnVenta(ProductsFilter filtroProductos) {

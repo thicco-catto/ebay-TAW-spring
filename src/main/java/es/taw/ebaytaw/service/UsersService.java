@@ -251,7 +251,7 @@ public class UsersService {
         user.setRegion(region);
         user.setPostalCode(postalCode);
 
-        System.out.println("sancho");
+        System.out.println ("sancho");
         System.out.println(rol + ", " + username + ", " + email + ", " + name + ", " + surname + ", " + gender + ", " + street + ", " + number + ", " + city + ", " + region + ", " + postalCode);
 
         this.uf.save(user);

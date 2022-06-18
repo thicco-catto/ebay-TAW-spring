@@ -12,8 +12,7 @@ import es.taw.ebaytaw.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,8 +31,12 @@ public class administradorProductosController {
 
     @Autowired
     public void setProductsService(ProductsService productsService, ProductsRepository productsRepository){
+    //public void setProductsService(ProductService productsService, ProductsRepository productsRepository,
+    //                               UsersRepository usersRepository, CategoriesRepository categoriesRepository){
         this.ps = productsService;
-        this.ps.setPf(productsRepository);
+        //this.ps.setPf(productsRepository);
+        //this.ps.setCf(categoriesRepository);
+        //this.ps.setUf(usersRepository);
     }
 
     @Autowired
@@ -44,17 +47,60 @@ public class administradorProductosController {
 
     @GetMapping("")
     public String showProducts(Model model){
-        List<ProductsDTO> products = this.ps.listarProductos();
-        List<CategoriesDTO> categories = this.cs.findAll();
-        List<UsersDTO> users = this.us.listarUsuarios();
+        setModelParameters(model);
 
+        List<ProductsDTO> products = this.ps.listarProductos();
         model.addAttribute("products", products);
-        model.addAttribute("categories", categories);
-        model.addAttribute("users", users);
 
         ProductsDTO productFilter = new ProductsDTO();
         model.addAttribute("productFilter", productFilter);
 
         return "/administrador/administrador_productos";
+    }
+
+    @PostMapping("/filtrar")
+    public String deleteProduct(Model model, @ModelAttribute("productFilter") ProductsDTO productFilter){
+        System.out.println(productFilter);
+        setModelParameters(model);
+
+        List<ProductsDTO> products = this.ps.listarProductos(productFilter);
+        model.addAttribute("products", products);
+
+        model.addAttribute("productFilter", productFilter);
+
+        return "/administrador/administrador_productos";
+    }
+
+    private void setModelParameters(Model model) {
+        List<CategoriesDTO> categories = this.cs.findAll();
+        List<UsersDTO> users = this.us.listarUsuarios();
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("users", users);
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String deleteProduct(@PathVariable("id") Integer id){
+        this.ps.borrarProducto(id);
+
+        return "redirect:/administrador/productos";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editProduct(Model model, @PathVariable("id") Integer id){
+        ProductsDTO product = this.ps.buscarProducto(id);
+        model.addAttribute("product", product);
+
+        List<CategoriesDTO> categories = this.cs.findAll();
+        model.addAttribute("categories", categories);
+
+        return "/administrador/administrador_editar_producto";
+    }
+
+    @PostMapping("/guardarEditado")
+    public String editProduct(@ModelAttribute("product") ProductsDTO product){
+        this.ps.editarProducto(product);
+
+        return "redirect:/administrador/productos";
     }
 }
