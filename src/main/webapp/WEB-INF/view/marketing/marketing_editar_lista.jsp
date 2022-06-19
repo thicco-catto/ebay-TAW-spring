@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
     Document   : marketing_editar_lista
     Author     : power
@@ -113,19 +114,9 @@
         <caption><h2> Buscar Usuarios </h2><caption>
             <tr>
                 <td>
+                    <input type="hidden" id="id" name="id" value="<%=id%>">
                     <label for="NombreUsuario">Nombre usuario</label>
                     <input type="NombreUsuario" id="NombreUsuario" name="NombreUsuario" size="50">
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    Ordernar por: <select name="OrderBy">
-                    <option value="">- - -</option>
-                    <option value="username">Nombre</option>
-                    <option value="email">Email</option>
-                    <option value="postalCode">Codigo Postal</option>
-                </select>
                 </td>
             </tr>
 

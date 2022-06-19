@@ -70,11 +70,11 @@
 
 <div class="topnav">
     <li style="float:right"><a href="/salir">Salir</a></li>
-    <li style="float:right"><a href="marketing_crear_mensaje.jsp ">Crear un nuevo mensaje</a></li>
-    <li style="float:right"><a href="marketing/verLista/">Ver listas</a></li>
-    <li style="float:right"><a href="marketing/crearLista/">Crear nueva lista</a></li>
-    <li style="float:right"><a href="MarketingMensajesRecibidosServlet?Usuario=<%= marketing.getUserID()%>">Mensajes Recibidos</a></li>
-    <li style="float:right"><a href="marketing/Controller/menu">Menu</a></li>
+    <li style="float:right"><a href="/marketing/mensajes/redactar">Crear un nuevo mensaje</a></li>
+    <li style="float:right"><a href="/marketing/verLista/">Ver listas</a></li>
+    <li style="float:right"><a href="/marketing/crearLista/">Crear nueva lista</a></li>
+    <li style="float:right"><a href="/marketing/mensajes/<%=marketing.getUserID()%>/misMensajes">Mensajes Recibidos</a></li>
+    <li style="float:right"><a href="/marketing/Controller/menu">Menu</a></li>
 
 
 

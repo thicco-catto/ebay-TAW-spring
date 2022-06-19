@@ -175,16 +175,24 @@ public class crearListaController {
     public String doEditarDesdeVerListas (@PathVariable("id") int listID, Model model) {
 
         //Creamos la nueva lista
-        Listausuarios nuevaLista = listausuariosRepository.findByListID(listID);
+        Listausuarios selectedList = listausuariosRepository.findByListID(listID);
         //Conseguimos el nombre de la lista
-        String fname = nuevaLista.getUsername();
+        String fname = selectedList.getUsername();
         //Traemos todos los usuarios
         List<Users> allUsers = usersRepository.findAll();
         List<UsersDTO> allUsersDTO = new ArrayList<>();
         for(Users u : allUsers) allUsersDTO.add(u.toDTO());
         //Traemos los usuarios de la lista
         List<UsersDTO> listUsersDTO = new ArrayList<>();
-
+        List<Users> usersSelectedList = usuarioslistaRepository.getUsuariosEnUnaLista(listID);
+        for(Users u : usersSelectedList) listUsersDTO.add(u.toDTO());
+        //Quitamos los usuarios añadidos
+        List<UsersDTO> usuariosRestantes = new ArrayList<>();
+        usuariosRestantes.addAll(allUsersDTO);
+        for(UsersDTO ul : allUsersDTO )
+            for(UsersDTO u : listUsersDTO )
+                if(ul.getUserID() == u.getUserID())
+                    usuariosRestantes.remove(ul);
 
         //Model
         //Nombre de la lista
@@ -193,7 +201,7 @@ public class crearListaController {
         model.addAttribute("id",listID);
         //todos los usuarios
         //Nombre de la lista
-        model.addAttribute("usuarios",allUsersDTO);
+        model.addAttribute("usuarios",usuariosRestantes);
         //usuarios de la lista
         //Nombre de la lista
         model.addAttribute("usuarioslista",listUsersDTO);
@@ -204,55 +212,40 @@ public class crearListaController {
     }
 
 
-
-
-    //Este metodo se llama desde CrearLista
-    //TODO:HAY QUE HACERLO NO FUNCIONA
     @PostMapping("/filtrar")
     public String doFiltrar (@RequestParam("id") int listID,
-                             @RequestParam("usuariosAdded") List<UsersDTO> usersAddedDTO,
-                             @RequestParam("OrderBy") String OrderBy,
-                             @RequestParam("NombreUsuario") String NombreUsuario, Model model) {
+                             @RequestParam("NombreUsuario") String Name, Model model) {
 
-
+        List<Users> filtedUsers = new ArrayList<>();
         //Hacemos el filtrado
-        List<Users> allUsers = usersRepository.findAll();
-        List<UsersDTO> allUsersDTO = new ArrayList<>();
-        for(Users u : allUsers) allUsersDTO.add(u.toDTO());
+        if(Name.length() > 0) filtedUsers = usersRepository.findByNameLike(Name);
+        else                  filtedUsers = usersRepository.findAll();
 
-
-
-
-
-
-
-
-
-
+        List<UsersDTO> filtedUsersDTO = new ArrayList<>();
+        for(Users u : filtedUsers) filtedUsersDTO.add(u.toDTO());
         //Traemos los usuarios de la lista
-        List<Users> listUsers = usuarioslistaRepository.getUsuariosEnUnaLista(listID);
-        List<UsersDTO> listUsersDTO = new ArrayList<>();
-        for(Users u : listUsers) listUsersDTO.add(u.toDTO());
+        List<UsersDTO> usuariosAddedDTO = new ArrayList<>();
+        List<Users> usuariosAdded = usuarioslistaRepository.getUsuariosEnUnaLista(listID);
+        for(Users u : usuariosAdded) usuariosAddedDTO.add(u.toDTO());
         //Quitamos los usuarios añadidos
         List<UsersDTO> usuariosRestantes = new ArrayList<>();
-        usuariosRestantes.addAll(allUsersDTO);
-        for(UsersDTO ul : allUsersDTO )
-            for(UsersDTO u : listUsersDTO )
+        usuariosRestantes.addAll(filtedUsersDTO);
+        for(UsersDTO ul : filtedUsersDTO )
+            for(UsersDTO u : usuariosAddedDTO)
                 if(ul.getUserID() == u.getUserID())
                     usuariosRestantes.remove(ul);
 
+         String nombreLista = listausuariosRepository.findByListID(listID).getUsername();
 
         //Model
         //Nombre de la lista
-        model.addAttribute("fname",listausuariosRepository.findByListID(listID).getUsername());
+        model.addAttribute("fname",nombreLista);
         //id de la lista
         model.addAttribute("id",listID);
-        //todos los usuarios
-        //Nombre de la lista
-        model.addAttribute("usuarios",allUsersDTO);
+        //usuarios filtrados
+        model.addAttribute("usuarios",usuariosRestantes);
         //usuarios de la lista
-        //Nombre de la lista
-        model.addAttribute("usuarioslista",listUsersDTO);
+        model.addAttribute("usuarioslista",usuariosAddedDTO);
 
 
         return "marketing/marketing_editar_lista";
@@ -270,7 +263,7 @@ public class crearListaController {
         this.listausuariosRepository.delete(listaToDelete);
 
 
-        return "redirect:marketing/marketing_menu";
+        return "redirect:/marketing/Controller/menu";
 
     }
 

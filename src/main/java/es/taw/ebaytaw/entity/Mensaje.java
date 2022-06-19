@@ -53,8 +53,8 @@ public class Mensaje implements Serializable {
         this.id = id;
     }
 
-    public Mensaje(Integer id, String texto) {
-        this.id = id;
+    public Mensaje(Users id, String texto) {
+        this.userID = id;
         this.texto = texto;
     }
 

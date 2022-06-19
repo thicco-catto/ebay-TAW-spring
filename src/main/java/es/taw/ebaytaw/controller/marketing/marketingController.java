@@ -10,7 +10,7 @@ public class marketingController {
 
     @GetMapping("/menu")
     public String goMenu(){
-        return "redirect:/marketing/marketing_menu";
+        return "marketing/marketing_menu";
     }
 
 

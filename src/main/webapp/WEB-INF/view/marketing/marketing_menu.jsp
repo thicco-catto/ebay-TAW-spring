@@ -28,16 +28,16 @@
         <tr>
         </tr>
         <tr>
-            <form action="marketing/crearLista/" method="get">
+            <form action="/marketing/crearLista/" method="get">
                 <td><input type="submit" value="Crear lista de usuarios" /></td>
             </form>
-            <form action="marketing/verLista/" method="get">
+            <form action="/marketing/verLista/" method="get">
                 <td><input type="submit" value="Ver listas de usuarios" /></td>
             </form>
-            <form action="./MarketingMensajesRecibidosServlet" method="POST">
+            <form action="/marketing/mensajes/<%=marketing.getUserID()%>/misMensajes" method="get">
                 <td><input type="submit" value="Ver mensajes recibidos" /></td>
             </form>
-            <form action="marketing_crear_mensaje.jsp" method="POST">
+            <form action="/marketing/mensajes/redactar" method="get">
                 <td><input type="submit" value="Crear un nuevo mensaje" /></td>
             </form>
 
