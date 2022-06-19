@@ -73,17 +73,17 @@ public class mensajesController {
         for(Usuarioslista u : listausuariosRepository.findByListID(listID).getUsuarioslistaList())
             this.mensajeRepository.save(new Mensaje(u.getUserID(),textoMensaje));
 
-        return "volver_al_menu";
+        return "marketing/marketing_menu";
     }
 
 
-    @GetMapping("/{mensajeID}/{textoMensaje}/borrar")
+    @GetMapping("/{mensajeID}/{userID}/borrar")
     public String doBorrar(@PathVariable("mensajeID") int mensajeID,@PathVariable("userID") int userID){
 
         //Encontramos el mensaje a borrar
         this.mensajeRepository.delete(this.mensajeRepository.findByUserIDAndId(this.usersRepository.findByUserID(userID),mensajeID));
 
-        return "volver_al_menu";
+        return "marketing/marketing_menu";
     }
 
 

@@ -61,7 +61,7 @@ public class loginController {
 
             switch (usuario.getRol()) {
                 case "Marketing":
-                    goTo = "marketing";
+                    goTo = "marketing/marketing_menu";
                     break;
                 case "Administrador":
                     goTo = "redirect:/administrador/usuarios";
