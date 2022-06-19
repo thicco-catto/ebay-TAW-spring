@@ -46,7 +46,7 @@ public class Bids implements Serializable {
     @ManyToOne(optional = false)
     private Users userID;
     @Basic(optional = false)
-    @Column(name = "price", nullable = false)
+    @Column(name = "priceBid", nullable = false)
     private BigDecimal price;
 
     public BigDecimal getPrice() {
