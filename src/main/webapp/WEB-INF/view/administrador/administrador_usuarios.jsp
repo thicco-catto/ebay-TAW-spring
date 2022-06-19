@@ -79,11 +79,11 @@
                 <form:option value="Mujer">Mujer</form:option>
                 <form:option value="No binario">No binario</form:option>
             </form:select> <br>
-            Numero: <form:input path="number"/> <br>
+            Numero: <form:input type="number" path="number"/> <br>
             Calle: <form:input path="street"/> <br>
             Ciudad: <form:input path="city"/> <br>
             Region: <form:input path="region"/> <br>
-            Codigo postal: <form:input path="postalCode"/> <br>
+            Codigo postal: <form:input type="number" path="postalCode"/> <br>
             <form:button>Filtrar</form:button> <br>
         </form:form>
 

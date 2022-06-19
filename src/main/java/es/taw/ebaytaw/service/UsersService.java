@@ -135,17 +135,18 @@ public class UsersService {
         if ((rol == null || rol.isEmpty()) && (username == null || username.isEmpty()) && (name == null || name.isEmpty()) && (email == null || email.isEmpty())
                 && (surname == null || surname.isEmpty()) && (gender == null || gender.isEmpty()) && (street == null || street.isEmpty())
                 && number == null && (city == null || city.isEmpty()) && (region == null || region.isEmpty()) && postalCode == null) {
-            users = this.uf.findAll();
+            users = this.usersRepository.findAll();
         } else {
             System.out.println(name.isEmpty());
-            users = this.uf.getUsers(rol, username, email, name, surname, gender, street, number, city, region, postalCode);
+            users = this.usersRepository.getUsers(rol, username, email, name, surname, gender, street, number, city, region, postalCode);
         }
         return this.listaEntityADTO(users);
     }
 
     public List<UsersDTO> listarUsuarios(UsersDTO userFilter) {
-        return listarUsuarios(userFilter.getRol(), userFilter.getUsername(), userFilter.getEmail(), userFilter.getName(),
-                userFilter.getSurname(), userFilter.getGender(), userFilter.getStreet(), userFilter.getNumber(),
+        return listarUsuarios(
+                userFilter.getRol().isEmpty() ? null : userFilter.getRol(), userFilter.getUsername(), userFilter.getEmail(), userFilter.getName(),
+                userFilter.getSurname(), userFilter.getGender().isEmpty() ? null : userFilter.getGender(), userFilter.getStreet(), userFilter.getNumber(),
                 userFilter.getCity(), userFilter.getRegion(), userFilter.getPostalCode());
     }
 
